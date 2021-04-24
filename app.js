@@ -31,17 +31,17 @@ app.get("/detail", function (req, res) {
 });
 
 app.get("/payment/success", function (req, res) {
-  console.log(req.query);
+  // console.log(req.query);
   res.send("Pago ok");
 });
 
 app.get("/payment/failure", function (req, res) {
-  console.log(req.query);
+  // console.log(req.query);
   res.send("Pago fallo");
 });
 
 app.get("/payment/pending", function (req, res) {
-  console.log(req.query);
+  // console.log(req.query);
   res.send("Pago pendiente");
 });
 
@@ -52,7 +52,7 @@ app.post("/detail", async function (req, res) {
   var preference = {
     external_reference: "josevasquez.dev@gmail.com",
     auto_return: "approved",
-    // notification_url: `${host}/payment/ipn`,
+    notification_url: `https://jmvs1991-mp-commerce-nodejs.herokuapp.com/payment/ipn`,
     payment_methods: {
       excluded_payment_methods: [
         {
@@ -91,12 +91,11 @@ app.post("/detail", async function (req, res) {
       },
     },
     back_urls: {
-      success: `${host}/payment/success`,
-      failure: `${host}/payment/failure`,
-      pending: `${host}/payment/pending`,
+      success: `https://jmvs1991-mp-commerce-nodejs.herokuapp.com/payment/success`,
+      failure: `https://jmvs1991-mp-commerce-nodejs.herokuapp.com/payment/failure`,
+      pending: `https://jmvs1991-mp-commerce-nodejs.herokuapp.com/payment/pending`,
     },
   };
-  // console.log(preference);
 
   const result = await mercadopago.preferences.create(preference);
   const { status } = result;
@@ -111,6 +110,7 @@ app.post("/detail", async function (req, res) {
 
 app.post("/payment/ipn", function (req, res) {
   console.log(req.body);
+  res.status(200).send("Ok");
 });
 
 app.listen(port);
