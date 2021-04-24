@@ -52,7 +52,7 @@ app.post("/detail", async function (req, res) {
   var preference = {
     external_reference: "josevasquez.dev@gmail.com",
     auto_return: "approved",
-    notification_url: `${host}/payment/ipn`,
+    // notification_url: `${host}/payment/ipn`,
     payment_methods: {
       excluded_payment_methods: [
         {
@@ -96,7 +96,7 @@ app.post("/detail", async function (req, res) {
       pending: `${host}/payment/pending`,
     },
   };
-  console.log(preference);
+  // console.log(preference);
 
   const result = await mercadopago.preferences.create(preference);
   const { status } = result;
