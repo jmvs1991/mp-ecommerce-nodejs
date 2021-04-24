@@ -31,23 +31,20 @@ app.get("/detail", function (req, res) {
 });
 
 app.get("/payment/success", function (req, res) {
-  // console.log(req.query);
-  res.send("Pago ok");
+  res.render("success", req.query);
 });
 
 app.get("/payment/failure", function (req, res) {
-  // console.log(req.query);
-  res.send("Pago fallo");
+  res.render("fail", req.query);
 });
 
 app.get("/payment/pending", function (req, res) {
-  // console.log(req.query);
-  res.send("Pago pendiente");
+  res.render("pending", req.query);
 });
 
 app.post("/detail", async function (req, res) {
   const { title, price, unit, img } = req.body;
-  const { host } = req.headers;
+  const { hostname } = req;
 
   var preference = {
     external_reference: "josevasquez.dev@gmail.com",
@@ -73,7 +70,10 @@ app.post("/detail", async function (req, res) {
         quantity: 1,
         currency_id: "ARS",
         unit_price: Number.parseFloat(price),
-        picture_url: img,
+        picture_url: `https://jmvs1991-mp-commerce-nodejs.herokuapp.com${img.replace(
+          ".",
+          ""
+        )}`,
       },
     ],
     payer: {
