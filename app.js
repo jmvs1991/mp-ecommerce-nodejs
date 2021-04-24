@@ -67,7 +67,7 @@ app.post("/detail", async function (req, res) {
       {
         id: "1234",
         title: title,
-        description: 'Dispositivo móvil de Tienda e-commerce',
+        description: "Dispositivo móvil de Tienda e-commerce",
         quantity: 1,
         currency_id: "ARS",
         unit_price: Number.parseFloat(price),
