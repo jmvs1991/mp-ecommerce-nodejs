@@ -96,7 +96,7 @@ app.post("/detail", async function (req, res) {
       pending: `${host}/payment/pending`,
     },
   };
-  // console.log(preference);
+  console.log(preference);
 
   const result = await mercadopago.preferences.create(preference);
   const { status } = result;
